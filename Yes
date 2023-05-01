@@ -12,8 +12,8 @@
 
 
 -- Important Variables
-local SCRIPT_NAME = "Luware Projects I PSX"
-local SCRIPT_VERSION = "v0.4" -- Hey rafa remember to change it before updating lmao
+local SCRIPT_NAME = "Luware PSX gui
+local SCRIPT_VERSION = "v0.4" -- Hey  remember to change it before updating lmao
 
 -- Detect if the script has executed by AutoExec
 local AutoExecuted = false
@@ -192,7 +192,7 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	
 	local GetRemoteFunction = debug.getupvalue(Library.Network.Invoke, 2)
 		-- OrbList = debug.getupvalue(orbsScript.Collect, 1)
-	local CoinsTable = debug.getupvalue(getsenv(LocalPlayer.PlayerScripts.Scripts.Game:WaitForChild("Coins", 10)).UpdateCoins, 2)
+	local CoinsTable = debug.getupvalue(getsenv(LocalPlayer.PlayerScripts.Scripts.Game:WaitForChild("Coins", 10)).DestroyAllCoins, 1)
 	local RenderedPets = debug.getupvalue(getsenv(LocalPlayer.PlayerScripts.Scripts.Game:WaitForChild("Pets", 10)).NetworkUpdate, 1)
 	
 	
@@ -508,9 +508,9 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	
 
 	local Window = Rayfield:CreateWindow({
-	   Name = "Pet Simulator GUI |",
+	   Name = "Pet Simulator GUI | by Rafa ",
 	   LoadingTitle = SCRIPT_NAME .. " " .. SCRIPT_VERSION,
-	   LoadingSubtitle = "by Luware Projects cred: Rafa",
+	   LoadingSubtitle = "by Rafa",
 	   ConfigurationSaving = {
 		  Enabled = true,
 		  FolderName = "Rafa",
@@ -589,7 +589,7 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	
 	
 	local autoFarmTab = Window:CreateTab("Farm", "13075651575", true)
-	local stats = autoFarmTab:CreateParagraph({Title = "Hello, <b><font color=\"#2B699F\">" .. LocalPlayer.DisplayName .. "</font></b>!", Content = "Thanks for using my script! - \nMake sure to join us at <b><font color=\"#2B699F\"></font></b>"})
+	local stats = autoFarmTab:CreateParagraph({Title = "Hello, <b><font color=\"#2B699F\">" .. LocalPlayer.DisplayName .. "</font></b>!", Content = "Thanks for using my script! - Rafa\nMake sure to join us at <b><font color=\"#2B699F\">discord.gg/MilkUp</font></b>"})
 	local autoFarmSection = autoFarmTab:CreateSection("Auto Farm", false, false, "7785988164")
 	local enableAutoFarm = false
 	autoFarmTab:CreateToggle({
@@ -930,7 +930,7 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 		local sortedCoins = {}
 		
 		
-		CoinsTable = debug.getupvalue(getsenv(LocalPlayer.PlayerScripts.Scripts.Game.Coins).UpdateCoins, 2)
+		CoinsTable = debug.getupvalue(getsenv(LocalPlayer.PlayerScripts.Scripts.Game.Coins).DestroyAllCoins, 1)
 		
 		for _, coin in pairs(coins) do
 			local coinMesh = coin:FindFirstChild("Coin")
@@ -1041,7 +1041,7 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	coroutine.wrap(function()
 		while true do 
 				if enableAutoFarm and not ScriptIsCurrentlyBusy then 
-					CoinsTable = debug.getupvalue(getsenv(LocalPlayer.PlayerScripts.Scripts.Game.Coins).UpdateCoins, 2)
+					CoinsTable = debug.getupvalue(getsenv(LocalPlayer.PlayerScripts.Scripts.Game.Coins).DestroyAllCoins, 1)
 					RenderedPets = debug.getupvalue(getsenv(LocalPlayer.PlayerScripts.Scripts.Game.Pets).NetworkUpdate, 1)
 					
 					if AutoFarm_FastMode then 
