@@ -12,8 +12,8 @@
 
 
 -- Important Variables
-local SCRIPT_NAME = "Luware PSX gui
-local SCRIPT_VERSION = "v0.4" -- Hey  remember to change it before updating lmao
+local SCRIPT_NAME = "Luware PSX GUI"
+local SCRIPT_VERSION = "v0.5" -- Hey rafa remember to change it before updating lmao
 
 -- Detect if the script has executed by AutoExec
 local AutoExecuted = false
