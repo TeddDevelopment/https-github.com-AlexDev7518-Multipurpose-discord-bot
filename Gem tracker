@@ -1,0 +1,82 @@
+
+local GainsOnly = false
+
+local ServerCheck = false
+while not ServerCheck do
+    if not game.Players.LocalPlayer.PlayerGui:FindFirstChild("__INTRO") and not game.Players.LocalPlayer.PlayerGui.Loading.Enabled then
+        ServerCheck = true
+    else
+        task.wait()
+    end
+end
+
+local Library = require(game:GetService("ReplicatedStorage").Library)
+local LibrarySave = Library.Save
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "GemTrackerGui"
+gui.Parent = game:GetService("CoreGui")
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 240, 0, 100)
+frame.Position = UDim2.new(0.1, 0, 0.3, 0)
+frame.BackgroundTransparency = 0.5
+frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+frame.BorderSizePixel = 0
+frame.Parent = gui
+
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 20)
+corner.Parent = frame
+
+local gemTrackerLabel = Instance.new("TextLabel")
+gemTrackerLabel.Size = UDim2.new(1, 0, 0.5, 0)
+gemTrackerLabel.Position = UDim2.new(0, 0, 0, 0)
+gemTrackerLabel.BackgroundTransparency = 1
+gemTrackerLabel.Font = Enum.Font.SourceSansBold
+gemTrackerLabel.Text = "Gem Tracker"
+gemTrackerLabel.TextColor3 = Color3.fromRGB(111, 229, 255)
+gemTrackerLabel.TextSize = 30
+gemTrackerLabel.TextStrokeTransparency = 0
+gemTrackerLabel.Parent = frame
+
+local gemCountLabel = Instance.new("TextLabel")
+gemCountLabel.Size = UDim2.new(1, 0, 0.5, 0)
+gemCountLabel.Position = UDim2.new(0, 0, 0.5, 0)
+gemCountLabel.BackgroundTransparency = 1
+gemCountLabel.Font = Enum.Font.SourceSansBold
+gemCountLabel.Text = "0"
+gemCountLabel.TextColor3 = Color3.fromRGB(111, 229, 255)
+gemCountLabel.TextScaled = true
+gemCountLabel.TextSize = 40
+gemCountLabel.TextStrokeTransparency = 0
+gemCountLabel.Parent = frame
+
+local gemCount = LibrarySave.Get().Diamonds
+local lastGems = 0
+
+local function CalculateGemDifference(gems)
+    if GainsOnly then
+        if gems < lastGems then
+            gems = lastGems
+        end
+    end
+    local formatted = tostring(gems)
+    while true do
+        formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", "%1,%2")
+        if k == 0 then
+            break
+        end
+    end
+    lastGems = gems
+    return formatted
+end
+
+local function UpdateGemCount()
+    gemCountLabel.Text = CalculateGemDifference(LibrarySave.Get().Diamonds - gemCount)
+end
+
+while true do
+    UpdateGemCount()
+    task.wait(0.01)
+end
